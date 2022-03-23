@@ -2,16 +2,14 @@ import 'package:flutter/material.dart';
 
 class CounterState {
   int _value = 0;
-  void increment() => _value++;
-  void decrement() {
-    if (_value <= 0) {
-      _value = 0;
-    } else {
-      _value--;
-    }
-  }
 
+  void inc() => _value++;
+  void dec() => _value--;
   int get value => _value;
+
+  bool diff(CounterState old) {
+    return old._value != _value;
+  }
 }
 
 class CounterProvider extends InheritedWidget {
@@ -24,7 +22,7 @@ class CounterProvider extends InheritedWidget {
   }
 
   @override
-  bool updateShouldNotify(covariant InheritedWidget oldWidget) {
-    return true;
+  bool updateShouldNotify(covariant CounterProvider oldWidget) {
+    return oldWidget.state.diff(state);
   }
 }

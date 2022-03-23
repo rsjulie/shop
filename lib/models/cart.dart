@@ -6,6 +6,7 @@ import 'package:shop/models/product.dart';
 
 class Cart with ChangeNotifier {
   Map<String, CartItem> _items = {};
+
   Map<String, CartItem> get items {
     return {..._items};
   }
@@ -15,7 +16,7 @@ class Cart with ChangeNotifier {
   }
 
   double get totalAmount {
-    double total = 0;
+    double total = 0.0;
     _items.forEach((key, cartItem) {
       total += cartItem.price * cartItem.quantity;
     });
@@ -28,8 +29,8 @@ class Cart with ChangeNotifier {
         product.id,
         (existingItem) => CartItem(
           id: existingItem.id,
+          productId: existingItem.productId,
           name: existingItem.name,
-          product_id: existingItem.product_id,
           quantity: existingItem.quantity + 1,
           price: existingItem.price,
         ),
@@ -39,8 +40,8 @@ class Cart with ChangeNotifier {
         product.id,
         () => CartItem(
           id: Random().nextDouble().toString(),
+          productId: product.id,
           name: product.name,
-          product_id: product.id,
           quantity: 1,
           price: product.price,
         ),

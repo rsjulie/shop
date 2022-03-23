@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:shop/providers/counter.dart';
-import '../models/product.dart';
 
 class CounterScreen extends StatefulWidget {
+  const CounterScreen({
+    Key? key,
+  }) : super(key: key);
+
   @override
-  State<CounterScreen> createState() => _CounterScreenState();
+  _CounterScreenState createState() => _CounterScreenState();
 }
 
 class _CounterScreenState extends State<CounterScreen> {
   @override
   Widget build(BuildContext context) {
     final provider = CounterProvider.of(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Contador'),
+        title: Text('Exemplo Contador'),
       ),
       body: Column(
         children: [
@@ -21,21 +25,21 @@ class _CounterScreenState extends State<CounterScreen> {
           IconButton(
             onPressed: () {
               setState(() {
-                provider?.state.increment();
+                provider?.state.inc();
               });
-              print(provider?.state.value.toString());
+              print(provider?.state.value);
             },
             icon: Icon(Icons.add),
           ),
           IconButton(
             onPressed: () {
               setState(() {
-                provider?.state.decrement();
+                provider?.state.dec();
               });
-              print(provider?.state.value.toString());
+              print(provider?.state.value);
             },
             icon: Icon(Icons.remove),
-          )
+          ),
         ],
       ),
     );
