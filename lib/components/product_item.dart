@@ -7,10 +7,11 @@ import 'package:shop/utils/app_routes.dart';
 class ProductItem extends StatelessWidget {
   final Product product;
 
-  const ProductItem({required this.product});
+  const ProductItem(this.product);
 
   @override
   Widget build(BuildContext context) {
+    final msg = ScaffoldMessenger.of(context);
     return ListTile(
       leading: CircleAvatar(
         backgroundImage: NetworkImage(product.imageUrl),
@@ -28,34 +29,48 @@ class ProductItem extends StatelessWidget {
               },
               icon: Icon(Icons.edit)),
           IconButton(
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (ctx) => AlertDialog(
-                          title: Text(
-                            'Tem certeza?',
-                          ),
-                          content:
-                              Text('Quer remover o item da lista de produtos?'),
-                          actions: [
-                            TextButton(
-                                child: Text('Não'),
-                                onPressed: () {
-                                  Navigator.of(context).pop(false);
-                                }),
-                            TextButton(
-                                child: Text('Sim'),
-                                onPressed: () {
-                                  Provider.of<ProductList>(
-                                    context,
-                                    listen: false,
-                                  ).removeProduct(product);
-                                  Navigator.of(context).pop(true);
-                                }),
-                          ],
-                        ));
-              },
-              icon: Icon(Icons.delete)),
+            icon: Icon(Icons.delete),
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                        title: const Text(
+                          'Tem certeza?',
+                        ),
+                        content: const Text(
+                            'Quer remover o item da lista de produtos?'),
+                        actions: [
+                          TextButton(
+                              child: const Text('Não'),
+                              onPressed: () {
+                                Navigator.of(context).pop(false);
+                              }),
+                          TextButton(
+                              child: const Text('Sim'),
+                              onPressed: () {
+                                Navigator.of(context).pop(true);
+                              }),
+                        ],
+                      )).then((value) async {
+                if (value ?? false) {
+                  try {
+                    await Provider.of<ProductList>(
+                      context,
+                      listen: false,
+                    ).removeProduct(product);
+                  } catch (error) {
+                    msg.showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          error.toString(),
+                        ),
+                      ),
+                    );
+                  }
+                }
+              });
+            },
+          ),
         ]),
       ),
     );

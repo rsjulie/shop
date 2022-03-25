@@ -34,10 +34,8 @@ class ProducstScreen extends StatelessWidget {
               itemBuilder: (ctx, i) {
                 return Column(
                   children: [
-                    ProductItem(
-                      product: products.items[i],
-                    ),
-                    Divider()
+                    ProductItem(products.items[i]),
+                    Divider(),
                   ],
                 );
               }),
