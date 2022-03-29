@@ -27,12 +27,11 @@ class OrderList with ChangeNotifier {
 
   Future<void> loadOrders() async {
     List<Order> items = [];
+
     final response = await http.get(
       Uri.parse('${Constants.ORDER_BASE_URL}/$_uid.json?auth=$_token'),
     );
-    if (response.body == 'null') {
-      return;
-    }
+    if (response.body == 'null') return;
     Map<String, dynamic> data = jsonDecode(response.body);
     data.forEach((orderId, orderData) {
       items.add(
@@ -40,20 +39,19 @@ class OrderList with ChangeNotifier {
           id: orderId,
           date: DateTime.parse(orderData['date']),
           total: orderData['total'],
-          products: (orderData['products'] as List<dynamic>)
-              .map(
-                (item) => CartItem(
-                    id: item['id'],
-                    productId: item['productId'],
-                    name: item['name'],
-                    quantity: item['quantity'],
-                    price: item['price']),
-              )
-              .toList(),
+          products: (orderData['products'] as List<dynamic>).map((item) {
+            return CartItem(
+                id: item['id'],
+                productId: item['productId'],
+                name: item['name'],
+                quantity: item['quantity'],
+                price: item['price']);
+          }).toList(),
         ),
       );
     });
-    items = items.reversed.toList();
+
+    _items = items.reversed.toList();
     notifyListeners();
   }
 
