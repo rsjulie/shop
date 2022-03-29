@@ -56,11 +56,11 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
           PopupMenuButton(
             icon: Icon(Icons.more_vert),
             itemBuilder: (_) => [
-              PopupMenuItem(
+              const PopupMenuItem(
                 child: Text('Somente Favoritos'),
                 value: FilterOptions.Favorite,
               ),
-              PopupMenuItem(
+              const PopupMenuItem(
                 child: Text('Todos'),
                 value: FilterOptions.All,
               ),
@@ -78,11 +78,11 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
         ],
       ),
       body: _isLoading
-          ? Center(
+          ? const Center(
               child: CircularProgressIndicator(),
             )
           : ProductGrid(_showFavoriteOnly),
-      drawer: AppDrawer(),
+      drawer: const AppDrawer(),
     );
   }
 }

@@ -25,16 +25,17 @@ class Badge extends StatelessWidget {
             padding: const EdgeInsets.all(2),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
+              // ignore: deprecated_member_use
               color: color ?? Theme.of(context).accentColor,
             ),
-            constraints: BoxConstraints(
+            constraints: const BoxConstraints(
               minHeight: 16,
               minWidth: 16,
             ),
             child: Text(
               value,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 10,
               ),
             ),

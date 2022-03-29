@@ -6,6 +6,8 @@ import 'package:shop/models/product_list.dart';
 import 'package:shop/utils/app_routes.dart';
 
 class ProducstScreen extends StatelessWidget {
+  const ProducstScreen({Key? key}) : super(key: key);
+
   Future<void> _refreshProducts(BuildContext context) {
     return Provider.of<ProductList>(context, listen: false).loadProducts();
   }
@@ -15,27 +17,27 @@ class ProducstScreen extends StatelessWidget {
     final ProductList products = Provider.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Gerenciar produtos'),
+        title: const Text('Gerenciar produtos'),
         actions: [
           IconButton(
               onPressed: () {
                 Navigator.of(context).pushNamed(AppRoutes.PRODUCT_FORM);
               },
-              icon: Icon(Icons.add))
+              icon: const Icon(Icons.add))
         ],
       ),
-      drawer: AppDrawer(),
+      drawer: const AppDrawer(),
       body: RefreshIndicator(
         onRefresh: () => _refreshProducts(context),
         child: Padding(
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           child: ListView.builder(
               itemCount: products.itemsCount,
               itemBuilder: (ctx, i) {
                 return Column(
                   children: [
                     ProductItem(products.items[i]),
-                    Divider(),
+                    const Divider(),
                   ],
                 );
               }),

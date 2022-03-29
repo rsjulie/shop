@@ -1,3 +1,4 @@
+// ignore_for_file: constant_identifier_names
 class Constants {
   static const USER_FAVORITES_URL =
       'https://shop-189cb-default-rtdb.firebaseio.com/userFavorites';
