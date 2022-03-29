@@ -14,37 +14,44 @@ class AuthScreen extends StatelessWidget {
             ], begin: Alignment.topLeft, end: Alignment.bottomRight),
           ),
         ),
-        Container(
-          width: double.infinity,
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  width: double.infinity,
-                  margin: EdgeInsets.only(bottom: 30),
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 146, 0, 204),
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 8,
-                          color: Colors.black26,
-                          offset: Offset(0, 2),
-                        )
-                      ]),
-                  child: Text(
-                    'Minha loja',
-                    style: TextStyle(
-                      fontSize: 40,
-                      fontFamily: 'Anton',
-                      color: Theme.of(context).accentTextTheme.headline6?.color,
+        Center(
+          child: SingleChildScrollView(
+            child: Container(
+              width: double.infinity,
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      width: double.infinity,
+                      margin: EdgeInsets.only(bottom: 30),
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 146, 0, 204),
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 8,
+                              color: Colors.black26,
+                              offset: Offset(0, 2),
+                            )
+                          ]),
+                      child: Text(
+                        'Minha loja',
+                        style: TextStyle(
+                          fontSize: 40,
+                          fontFamily: 'Anton',
+                          color: Theme.of(context)
+                              .accentTextTheme
+                              .headline6
+                              ?.color,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                AuthForm(),
-              ]),
+                    AuthForm(),
+                  ]),
+            ),
+          ),
         )
       ]),
     );

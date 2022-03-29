@@ -16,9 +16,13 @@ class ProductGridItem extends StatelessWidget {
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
         child: GestureDetector(
-          child: Image.network(
-            product.imageUrl,
-            fit: BoxFit.cover,
+          child: Hero(
+            tag: product.id,
+            child: FadeInImage(
+              image: NetworkImage(product.imageUrl),
+              placeholder: AssetImage('assets/images/download.png'),
+              fit: BoxFit.cover,
+            ),
           ),
           onTap: () {
             Navigator.of(context).pushNamed(
