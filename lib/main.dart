@@ -10,6 +10,7 @@ import 'package:shop/screens/product_detail_screen.dart';
 import 'package:shop/screens/product_form_screen.dart';
 import 'package:shop/screens/products_screen.dart';
 import 'package:shop/utils/app_routes.dart';
+import 'package:shop/utils/custom_route.dart';
 import 'models/product_list.dart';
 
 void main() {
@@ -17,7 +18,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -52,11 +52,13 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
-          primarySwatch: Colors.purple,
-          accentColor: Colors.deepOrange,
-          fontFamily: 'Lato',
-        ),
-        // home: ProductsOverviewScreen(),
+            primarySwatch: Colors.purple,
+            accentColor: Colors.deepOrange,
+            fontFamily: 'Lato',
+            pageTransitionsTheme: PageTransitionsTheme(builders: {
+              TargetPlatform.android: CustomPageTransitionBuilder(),
+              TargetPlatform.iOS: CustomPageTransitionBuilder()
+            })),
         routes: {
           AppRoutes.AUTH_OR_HOME: (ctx) => AuthOrHomeScreen(),
           AppRoutes.PRODUCT_DETAIL: (ctx) => ProductDetailScreen(),
